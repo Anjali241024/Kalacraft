@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CraftNest – Your creative hub for art, craft, and DIY projects. Tutorials, tips, and handmade inspiration."/>
+  <meta name="keywords" content="art and craft, DIY, handmade, tutorials, creative projects, crafting ideas"/>
+  <meta name="author" content="CraftNest"/>
+  <title>CraftNest – Art, Craft & DIY Inspiration</title>
+
+  <!-- ===== GOOGLE ANALYTICS (GA4) ===== -->
+  <!-- Replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- ===== GOOGLE ADSENSE ===== -->
+  <!-- Replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  <!-- ===== GOOGLE FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ======================================
+       CSS VARIABLES & RESET
+    ====================================== */
+    :root {
+      --cream: #fdf6ec;
+      --warm-white: #fffdf8;
+      --terracotta: #c9614a;
+      --terracotta-light: #e07d67;
+      --sage: #7a9e7e;
+      --sage-dark: #4f7a55;
+      --mustard: #e8a020;
+      --charcoal: #2c2c2c;
+      --mid-gray: #6b6b6b;
+      --light-gray: #e8e2d9;
+      --paper: #f5efe4;
+      --border: #ddd5c8;
+      --shadow: rgba(44,44,44,0.10);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-hand: 'Caveat', cursive;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ======================================
+       GRAIN OVERLAY
+    ====================================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* ======================================
+       SCROLLBAR
+    ====================================== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 3px; }
+
+    /* ======================================
+       TOP ANNOUNCEMENT BAR
+    ====================================== */
+    .announcement-bar {
+      background: var(--terracotta);
+      color: #fff;
+      text-align: center;
+      padding: 9px 20px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .announcement-bar a { color: #fff; text-decoration: underline; font-weight: 700; }
+
+    /* ======================================
+       HEADER / NAV
+    ====================================== */
+    header {
+      background: var(--warm-white);
+      border-bottom: 1.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 18px var(--shadow);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+    }
+    .logo-text span { color: var(--terracotta); }
+
+    nav ul {
+      display: flex;
+      gap: 6px;
+    }
+    nav ul li a {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      transition: background var(--transition), color var(--transition);
+    }
+    nav ul li a:hover, nav ul li a.active {
+      background: var(--paper);
+      color: var(--terracotta);
+    }
+
+    .nav-cta {
+      background: var(--terracotta) !important;
+      color: #fff !important;
+      padding: 8px 18px !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #b3503a !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--charcoal); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ======================================
+       HERO
+    ====================================== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fdf0e0 0%, #f9e4d0 40%, #f0e8da 100%);
+      padding: 80px 28px;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Decorative blobs */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,97,74,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(122,158,126,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,97,74,0.12);
+      color: var(--terracotta);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-tag::before { content: '✦'; font-size: 0.7rem; }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 22px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--mid-gray);
+      max-width: 480px;
+      margin-bottom: 34px;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #b3503a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,97,74,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--charcoal);
+      padding: 12px 26px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      transition: border-color var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      border-color: var(--terracotta);
+      background: rgba(201,97,74,0.05);
+    }
+
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+    }
+
+    .hero-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: var(--paper);
+      box-shadow: 0 4px 20px var(--shadow);
+      transition: transform var(--transition);
+    }
+    .hero-card:hover { transform: scale(1.025); }
+
+    .hero-card:nth-child(1) { grid-row: span 2; }
+
+    .hero-card-img {
+      width: 100%; height: 100%; min-height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .hero-card-1 { background: linear-gradient(145deg, #f9c784, #e8a020); min-height: 260px; }
+    .hero-card-2 { background: linear-gradient(145deg, #b5d5b5, #7a9e7e); }
+    .hero-card-3 { background: linear-gradient(145deg, #f0a898, #c9614a); }
+
+    .hero-card-label {
+      position: absolute;
+      bottom: 12px; left: 12px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    /* ======================================
+       GOOGLE ADS BANNER (Header Leaderboard)
+    ====================================== */
+    .ads-banner-top {
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .ads-banner-top ins.adsbygoogle {
+      display: block;
+      max-width: 728px;
+      margin: 0 auto;
+    }
+
+    /* AdSense placeholder for dev view */
+    .ad-placeholder {
+      background: #f0ece4;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mid-gray);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ======================================
+       SECTION STYLES
+    ====================================== */
+    section { padding: 80px 28px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: var(--mid-gray);
+      max-width: 560px;
+      font-size: 1rem;
+      margin-bottom: 48px;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--terracotta);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color var(--transition);
+      white-space: nowrap;
+    }
+    .view-all:hover { border-color: var(--terracotta); }
+    .view-all::after { content: '→'; }
+
+    /* ======================================
+       CATEGORY PILLS
+    ====================================== */
+    .categories {
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+    }
+    .categories-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      padding: 16px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .categories-inner::-webkit-scrollbar { display: none; }
+
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      background: var(--warm-white);
+      border: 1.5px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+    .cat-pill .cat-icon { font-size: 1rem; }
+
+    /* ======================================
+       FEATURED POSTS (Blog Grid)
+    ====================================== */
+    .posts-section { background: var(--warm-white); }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .post-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px var(--shadow);
+    }
+
+    .post-thumb {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .post-thumb-1 { background: linear-gradient(145deg, #f9d9a0, #e8a020); }
+    .post-thumb-2 { background: linear-gradient(145deg, #c5ddc5, #7a9e7e); }
+    .post-thumb-3 { background: linear-gradient(145deg, #f5c5bc, #c9614a); }
+    .post-thumb-4 { background: linear-gradient(145deg, #d4c5e2, #8b6ca6); }
+    .post-thumb-5 { background: linear-gradient(145deg, #c5d8e8, #5b8ab0); }
+    .post-thumb-6 { background: linear-gradient(145deg, #e8c5a0, #a06b3a); }
+
+    .post-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(255,255,255,0.9);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--terracotta);
+    }
+
+    .post-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--mid-gray);
+      margin-bottom: 10px;
+    }
+    .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+
+    .post-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+      transition: color var(--transition);
+    }
+    .post-card:hover .post-title { color: var(--terracotta); }
+
+    .post-excerpt {
+      font-size: 0.88rem;
+      color: var(--mid-gray);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .author-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .av1 { background: var(--terracotta); }
+    .av2 { background: var(--sage); }
+    .av3 { background: var(--mustard); }
+
+    .author-name { font-size: 0.8rem; font-weight: 500; }
+
+    .read-more {
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .read-more:hover { gap: 8px; }
+
+    /* ======================================
+       ADSENSE IN-FEED AD
+    ====================================== */
+    .in-feed-ad {
+      background: var(--paper);
+      border-radius: var(--radius);
+      border: 1.5px dashed var(--border);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+    }
+
+    /* ======================================
+       FEATURED PROJECT (Big Card)
+    ====================================== */
+    .featured-section { background: var(--cream); }
+
+    .featured-card {
+      background: linear-gradient(135deg, #2c2c2c 0%, #3d3530 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 380px;
+      position: relative;
+    }
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .featured-content {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .featured-tag {
+      display: inline-block;
+      background: var(--terracotta);
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .featured-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .featured-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* ======================================
+       DIY STEPS
+    ====================================== */
+    .steps-section { background: var(--paper); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 32px 20px;
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    .step-card:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -16px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--border);
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 44px; height: 44px;
+      background: var(--terracotta);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0 auto 16px;
+    }
+    .step-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-desc { font-size: 0.85rem; color: var(--mid-gray); }
+
+    /* ======================================
+       SIDEBAR + MAIN LAYOUT (Blog Page)
+    ====================================== */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ======================================
+       SINGLE POST PREVIEW
+    ====================================== */
+    .article-section { background: var(--cream); }
+
+    .article-preview {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+
+    .article-header {
+      background: linear-gradient(145deg, #f9d5c5, #e8a89a);
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-header::after {
+      content: '🎨';
+      position: absolute;
+      right: 40px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 5rem;
+      opacity: 0.3;
+    }
+    .article-header .post-meta { margin-bottom: 16px; }
+    .article-header .post-meta span { color: rgba(44,44,44,0.6); }
+    .article-h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.25;
+      max-width: 600px;
+    }
+
+    .article-body { padding: 48px; }
+    .article-body p { margin-bottom: 20px; line-height: 1.85; font-size: 0.98rem; }
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 36px 0 16px;
+    }
+    .article-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 28px 0 12px;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .article-body ul { list-style: disc; }
+    .article-body ol { list-style: decimal; }
+    .article-body li { margin-bottom: 8px; font-size: 0.97rem; }
+
+    .internal-link {
+      color: var(--terracotta);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(201,97,74,0.3);
+      transition: border-color var(--transition);
+    }
+    .internal-link:hover { border-color: var(--terracotta); }
+
+    .external-link {
+      color: var(--sage-dark);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(79,122,85,0.3);
+      transition: border-color var(--transition);
+    }
+    .external-link:hover { border-color: var(--sage-dark); }
+    .external-link::after { content: ' ↗'; font-size: 0.8em; }
+
+    .callout-box {
+      background: linear-gradient(135deg, rgba(201,97,74,0.08), rgba(201,97,74,0.04));
+      border-left: 4px solid var(--terracotta);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout-box strong { color: var(--terracotta); }
+
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .tag-pill {
+      padding: 5px 12px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--mid-gray);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .tag-pill:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+
+    /* ======================================
+       SIDEBAR
+    ====================================== */
+    .sidebar { display: flex; flex-direction: column; gap: 28px; }
+
+    .sidebar-widget {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+    }
+
+    .widget-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .popular-post {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+    .popular-thumb {
+      width: 62px; height: 62px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .pp1 { background: linear-gradient(145deg,#f9d5c5,#e8a89a); }
+    .pp2 { background: linear-gradient(145deg,#c5ddc5,#7a9e7e); }
+    .pp3 { background: linear-gradient(145deg,#f9d9a0,#e8a020); }
+    .pp4 { background: linear-gradient(145deg,#d4c5e2,#8b6ca6); }
+
+    .popular-info .ptitle {
+      font-weight: 600;
+      font-size: 0.88rem;
+      line-height: 1.35;
+      margin-bottom: 4px;
+      color: var(--charcoal);
+      transition: color var(--transition);
+    }
+    .popular-post:hover .ptitle { color: var(--terracotta); }
+    .popular-info .pmeta { font-size: 0.75rem; color: var(--mid-gray); }
+
+    .category-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--light-gray);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .category-list li:last-child { border-bottom: none; }
+    .category-list li:hover { color: var(--terracotta); }
+    .cat-count {
+      background: var(--paper);
+      color: var(--mid-gray);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Newsletter */
+    .newsletter-widget { background: linear-gradient(135deg, var(--terracotta), #b3503a); }
+    .newsletter-widget .widget-title { color: #fff; border-color: rgba(255,255,255,0.2); }
+    .newsletter-widget p { color: rgba(255,255,255,0.8); font-size: 0.88rem; margin-bottom: 16px; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-form input {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      background: rgba(255,255,255,0.95);
+    }
+    .newsletter-form input:focus { outline: 2px solid rgba(255,255,255,0.6); }
+    .newsletter-form button {
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 2px solid rgba(255,255,255,0.7);
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background var(--transition);
+    }
+    .newsletter-form button:hover { background: rgba(255,255,255,0.15); }
+
+    /* ======================================
+       TOOLS SECTION
+    ====================================== */
+    .tools-section { background: var(--warm-white); }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tool-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+    }
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow);
+      border-color: var(--terracotta);
+    }
+    .tool-icon-wrap {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .ti1 { background: rgba(201,97,74,0.12); }
+    .ti2 { background: rgba(122,158,126,0.15); }
+    .ti3 { background: rgba(232,160,32,0.15); }
+    .ti4 { background: rgba(139,108,166,0.15); }
+    .ti5 { background: rgba(91,138,176,0.15); }
+    .ti6 { background: rgba(160,107,58,0.15); }
+
+    .tool-info .tool-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+    .tool-info .tool-desc { font-size: 0.83rem; color: var(--mid-gray); line-height: 1.6; }
+    .external-badge {
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--mid-gray);
+      font-weight: 600;
+      margin-top: 6px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ======================================
+       GOOGLE ADS - DISPLAY AD
+    ====================================== */
+    .mid-ad-section {
+      background: var(--paper);
+      padding: 28px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .mid-ad-section ins.adsbygoogle {
+      display: block;
+      max-width: 970px;
+      margin: 0 auto;
+    }
+
+    /* ======================================
+       SHOP / PRODUCT SECTION
+    ====================================== */
+    .shop-section { background: var(--cream); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px var(--shadow);
+    }
+    .product-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+    .pt1 { background: linear-gradient(145deg,#f9d9a0,#e8c060); }
+    .pt2 { background: linear-gradient(145deg,#b5d5b5,#7a9e7e); }
+    .pt3 { background: linear-gradient(145deg,#f5c5bc,#c9614a); }
+    .pt4 { background: linear-gradient(145deg,#d4c5e2,#8b6ca6); }
+
+    .product-badge-new {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--sage);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .product-body { padding: 18px; }
+    .product-cat { font-size: 0.72rem; color: var(--terracotta); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .product-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
+    .product-price { font-size: 1.1rem; font-weight: 700; color: var(--terracotta); }
+    .product-price del { font-size: 0.82rem; color: var(--mid-gray); font-weight: 400; margin-left: 6px; }
+    .product-add-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 9px;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background var(--transition);
+    }
+    .product-add-btn:hover { background: #b3503a; }
+
+    /* ======================================
+       TESTIMONIALS
+    ====================================== */
+    .testimonials-section { background: var(--paper); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1.5px solid var(--border);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: var(--font-display);
+      font-size: 5rem;
+      color: var(--terracotta);
+      opacity: 0.15;
+      position: absolute;
+      top: 10px; left: 20px;
+      line-height: 1;
+    }
+    .stars { color: var(--mustard); font-size: 0.9rem; margin-bottom: 14px; }
+    .testimonial-text { font-size: 0.9rem; line-height: 1.75; color: var(--mid-gray); margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .ta-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .ta1 { background: var(--terracotta); }
+    .ta2 { background: var(--sage); }
+    .ta3 { background: var(--mustard); }
+    .ta-name { font-weight: 700; font-size: 0.9rem; }
+    .ta-role { font-size: 0.78rem; color: var(--mid-gray); }
+
+    /* ======================================
+       BOTTOM BANNER AD
+    ====================================== */
+    .bottom-ad {
+      background: var(--paper);
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ======================================
+       FOOTER
+    ====================================== */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.75);
+      padding: 64px 28px 32px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo-text { color: #fff; font-size: 1.4rem; }
+    .footer-brand .logo-text span { color: var(--terracotta-light); }
+    .footer-tagline {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.45);
+      margin: 8px 0 16px;
+    }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.8; max-width: 260px; }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background var(--transition);
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--terracotta); }
+
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      font-size: 0.87rem;
+      transition: color var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--terracotta-light); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-bottom p { font-size: 0.82rem; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 0.82rem; transition: color var(--transition); }
+    .footer-legal a:hover { color: var(--terracotta-light); }
+
+    /* ======================================
+       BACK TO TOP
+    ====================================== */
+    .back-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 44px; height: 44px;
+      background: var(--terracotta);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(201,97,74,0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 999;
+      border: none;
+    }
+    .back-top.show { opacity: 1; transform: translateY(0); }
+    .back-top:hover { background: #b3503a; }
+
+    /* ======================================
+       BREADCRUMB
+    ====================================== */
+    .breadcrumb {
+      background: var(--paper);
+      padding: 12px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--mid-gray);
+    }
+    .breadcrumb-inner a { color: var(--terracotta); }
+    .breadcrumb-inner span { color: var(--border); }
+
+    /* ======================================
+       MOBILE
+    ====================================== */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .posts-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .step-card:not(:last-child)::after { display: none; }
+      .blog-layout { grid-template-columns: 1fr; }
+      .sidebar { display: grid; grid-template-columns: 1fr 1fr; }
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-visual { min-height: 180px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner nav { display: none; }
+      .hamburger { display: flex; }
+      .posts-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .sidebar { grid-template-columns: 1fr; }
+      .article-header { padding: 32px 24px; }
+      .article-body { padding: 28px 24px; }
+    }
+
+    /* ======================================
+       MOBILE NAV
+    ====================================== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(44,44,44,0.5);
+      z-index: 9990;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: 280px;
+      height: 100%;
+      background: var(--warm-white);
+      padding: 24px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+    }
+    .mobile-nav.open .mobile-nav-panel { transform: translateX(0); }
+    .mobile-nav-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--charcoal);
+    }
+    .mobile-nav-panel ul { margin-top: 48px; }
+    .mobile-nav-panel ul li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-nav-panel ul li a { font-size: 1rem; font-weight: 500; }
+
+    /* ======================================
+       ANIMATIONS
+    ====================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-up {
+      animation: fadeUp 0.7s ease both;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* Intersection observer reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ANNOUNCEMENT BAR ===== -->
+  <div class="announcement-bar">
+    🎉 New DIY Workshop: <a href="#workshops">Macramé Wall Hanging</a> — Free this weekend only!
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="nav-inner">
+      <a href="#home" class="logo" onclick="trackClick('logo')">
+        <div class="logo-icon">🎨</div>
+        <span class="logo-text">Craft<span>Nest</span></span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active" onclick="trackClick('nav_home')">Home</a></li>
+          <li><a href="#blog" onclick="trackClick('nav_blog')">Blog</a></li>
+          <li><a href="#tutorials" onclick="trackClick('nav_tutorials')">Tutorials</a></li>
+          <li><a href="#shop" onclick="trackClick('nav_shop')">Shop</a></li>
+          <li><a href="#about" onclick="trackClick('nav_about')">About</a></li>
+          <li><a href="#contact" class="nav-cta" onclick="trackClick('nav_cta')">Get Started</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="Menu" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== GOOGLE ADS - LEADERBOARD (728x90) ===== -->
+  <div class="ads-banner-top">
+    <!-- Google Ads Leaderboard -->
+    <ins class="adsbygoogle ad-placeholder"
+         style="display:block;width:728px;height:90px;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="horizontal">
+    </ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNavOutside(event)">
+    <div class="mobile-nav-panel">
+      <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+      <ul>
+        <li><a href="#home" onclick="closeMobileNav()">🏠 Home</a></li>
+        <li><a href="#blog" onclick="closeMobileNav()">📝 Blog</a></li>
+        <li><a href="#tutorials" onclick="closeMobileNav()">🎓 Tutorials</a></li>
+        <li><a href="#shop" onclick="closeMobileNav()">🛍️ Shop</a></li>
+        <li><a href="#about" onclick="closeMobileNav()">👋 About</a></li>
+        <li><a href="#contact" onclick="closeMobileNav()">📩 Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-tag animate-up">Handmade with Love</span>
+        <h1 class="animate-up delay-1">
+          Create <em>Beautiful</em><br/>Things With Your<br/>Hands
+        </h1>
+        <p class="animate-up delay-2">
+          Discover thousands of art, craft, and DIY tutorials. From beginner basics to advanced techniques — unleash your creativity with CraftNest.
+        </p>
+        <div class="hero-btns animate-up delay-3">
+          <a href="#blog" class="btn-primary" onclick="trackClick('hero_explore')">
+            Explore Projects →
+          </a>
+          <a href="#tutorials" class="btn-secondary" onclick="trackClick('hero_tutorials')">
+            Free Tutorials
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual animate-up delay-4">
+        <div class="hero-card hero-card-1">
+          <div class="hero-card-img">🎨</div>
+          <span class="hero-card-label">Painting</span>
+        </div>
+        <div class="hero-card hero-card-2">
+          <div class="hero-card-img" style="min-height:110px;">🧵</div>
+          <span class="hero-card-label">Sewing</span>
+        </div>
+        <div class="hero-card hero-card-3">
+          <div class="hero-card-img" style="min-height:110px;">🏺</div>
+          <span class="hero-card-label">Pottery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORY PILLS ===== -->
+  <div class="categories">
+    <div class="categories-inner">
+      <span class="cat-pill active" onclick="filterCategory(this, 'all')"><span class="cat-icon">✨</span>All</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'painting')"><span class="cat-icon">🎨</span>Painting</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'knitting')"><span class="cat-icon">🧶</span>Knitting</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'papercraft')"><span class="cat-icon">📄</span>Paper Craft</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'pottery')"><span class="cat-icon">🏺</span>Pottery</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'macrame')"><span class="cat-icon">🌿</span>Macramé</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'upcycling')"><span class="cat-icon">♻️</span>Upcycling</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'jewelry')"><span class="cat-icon">💎</span>Jewelry</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'candles')"><span class="cat-icon">🕯️</span>Candles</span>
+      <span class="cat-pill" onclick="filterCategory(this, 'resin')"><span class="cat-icon">✦</span>Resin Art</span>
+    </div>
+  </div>
+
+  <!-- ===== FEATURED POSTS ===== -->
+  <section id="blog" class="posts-section">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <span class="section-label">From the Blog</span>
+          <h2 class="section-title">Latest Craft Tutorials & Ideas</h2>
+        </div>
+        <a href="#blog" class="view-all" onclick="trackClick('view_all_posts')">View All Posts</a>
+      </div>
+
+      <div class="posts-grid" id="postsGrid">
+
+        <!-- Post 1 -->
+        <article class="post-card reveal" data-category="painting" onclick="openPost('watercolor')">
+          <div class="post-thumb post-thumb-1">
+            🎨
+            <span class="post-badge">Trending</span>
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Painting</span>
+              <span class="dot"></span>
+              <span>8 min read</span>
+              <span class="dot"></span>
+              <span>Apr 12</span>
+            </div>
+            <h3 class="post-title">Beginner's Guide to Watercolor Painting: 10 Essential Techniques</h3>
+            <p class="post-excerpt">Master the wet-on-wet technique, color blending, and brush control with this step-by-step beginner guide to beautiful watercolors.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av1">SR</div>
+                <span class="author-name">Sara Ramos</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="post-card reveal" data-category="macrame" onclick="openPost('macrame')">
+          <div class="post-thumb post-thumb-2">
+            🌿
+            <span class="post-badge">Popular</span>
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Macramé</span>
+              <span class="dot"></span>
+              <span>12 min read</span>
+              <span class="dot"></span>
+              <span>Apr 9</span>
+            </div>
+            <h3 class="post-title">DIY Macramé Wall Hanging: Full Tutorial for Beautiful Boho Decor</h3>
+            <p class="post-excerpt">Create a stunning boho-style wall hanging with just rope and a wooden dowel. Includes knot guide and full materials list.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av2">MK</div>
+                <span class="author-name">Maya Kim</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="post-card reveal" data-category="pottery" onclick="openPost('pottery')">
+          <div class="post-thumb post-thumb-3">
+            🏺
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Pottery</span>
+              <span class="dot"></span>
+              <span>6 min read</span>
+              <span class="dot"></span>
+              <span>Apr 6</span>
+            </div>
+            <h3 class="post-title">Air-Dry Clay Bowls: No Kiln Needed! Easy Home Pottery Guide</h3>
+            <p class="post-excerpt">You don't need a potter's wheel to create beautiful ceramics. Learn to make gorgeous bowls at home with air-dry clay.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av3">PL</div>
+                <span class="author-name">Priya Lal</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- In-feed Ad slot -->
+        <div class="in-feed-ad reveal">
+          <!-- Google AdSense In-Feed Ad -->
+          <ins class="adsbygoogle"
+               style="display:block;width:100%;height:200px;"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="9876543210"
+               data-ad-format="fluid"
+               data-ad-layout-key="-fb+5w+4e-db+86">
+          </ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Post 4 -->
+        <article class="post-card reveal" data-category="jewelry" onclick="openPost('jewelry')">
+          <div class="post-thumb post-thumb-4">💎</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Jewelry</span>
+              <span class="dot"></span>
+              <span>10 min read</span>
+              <span class="dot"></span>
+              <span>Apr 3</span>
+            </div>
+            <h3 class="post-title">Wire Wrapping for Beginners: Make Stunning Crystal Pendants</h3>
+            <p class="post-excerpt">Turn raw crystals and gemstones into wearable art with these beginner-friendly wire wrapping techniques.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av1">SR</div>
+                <span class="author-name">Sara Ramos</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="post-card reveal" data-category="upcycling" onclick="openPost('upcycling')">
+          <div class="post-thumb post-thumb-5">♻️</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Upcycling</span>
+              <span class="dot"></span>
+              <span>7 min read</span>
+              <span class="dot"></span>
+              <span>Mar 30</span>
+            </div>
+            <h3 class="post-title">15 Genius Ways to Upcycle Old Mason Jars Into Home Decor</h3>
+            <p class="post-excerpt">Don't throw away those empty jars! Transform them into beautiful candle holders, planters, and storage solutions.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av2">MK</div>
+                <span class="author-name">Maya Kim</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="post-card reveal" data-category="candles" onclick="openPost('candles')">
+          <div class="post-thumb post-thumb-6">🕯️</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>Candles</span>
+              <span class="dot"></span>
+              <span>9 min read</span>
+              <span class="dot"></span>
+              <span>Mar 28</span>
+            </div>
+            <h3 class="post-title">How to Make Soy Wax Candles at Home: Scented & Beautiful</h3>
+            <p class="post-excerpt">Create luxurious hand-poured soy candles with your favourite scents. Full recipe, tips, and troubleshooting guide included.</p>
+            <div class="post-footer">
+              <div class="post-author">
+                <div class="author-avatar av3">PL</div>
+                <span class="author-name">Priya Lal</span>
+              </div>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PROJECT ===== -->
+  <section id="tutorials" class="featured-section">
+    <div class="container">
+      <div class="featured-card reveal">
+        <div class="featured-content">
+          <span class="featured-tag">✦ Project of the Month</span>
+          <h2 class="featured-title">Resin Ocean Art Table — A Full Weekend Project</h2>
+          <p class="featured-desc">Learn to pour epoxy resin, create ocean wave effects, and cast beautiful functional art pieces. All supplies linked, no experience required.</p>
+          <a href="#tutorials" class="btn-primary" style="width:fit-content;" onclick="trackClick('featured_cta')">
+            Start the Project →
+          </a>
+        </div>
+        <div class="featured-visual">🌊</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MID-PAGE AD ===== -->
+  <div class="mid-ad-section">
+    <!-- Google Ads Rectangle / Leaderboard -->
+    <ins class="adsbygoogle ad-placeholder"
+         style="display:block;width:970px;max-width:100%;height:90px;margin:0 auto;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1122334455"
+         data-ad-format="auto"
+         data-full-width-responsive="true">
+    </ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ===== ARTICLE PREVIEW (Blog Post Page) ===== -->
+  <section class="article-section" id="article">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <div class="breadcrumb-inner">
+        <a href="#home">Home</a>
+        <span>›</span>
+        <a href="#blog">Blog</a>
+        <span>›</span>
+        <span>Watercolor Painting</span>
+      </div>
+    </div>
+
+    <div style="padding: 60px 28px;">
+      <div class="blog-layout">
+        <!-- Main Article -->
+        <main>
+          <div class="article-preview reveal">
+            <div class="article-header">
+              <div class="post-meta">
+                <span>📅 April 12, 2025</span>
+                <span class="dot" style="background:#aaa;"></span>
+                <span>✍️ Sara Ramos</span>
+                <span class="dot" style="background:#aaa;"></span>
+                <span>⏱️ 8 min read</span>
+              </div>
+              <h1 class="article-h1">Beginner's Guide to Watercolor Painting: 10 Essential Techniques</h1>
+            </div>
+
+            <div class="article-body">
+              <p>Watercolor painting is one of the most accessible and rewarding art forms for beginners. Unlike oil or acrylic, watercolors require minimal supplies and dry quickly — making them perfect for crafters who want to <a href="#blog" class="internal-link">explore painting as a new hobby</a>.</p>
+
+              <h2>What You'll Need</h2>
+              <p>Before diving into techniques, you'll need a few key supplies. The quality of your paper matters enormously — always use <strong>cold-pressed watercolor paper</strong> (300gsm or heavier). For brushes, a round #8 and a flat wash brush will cover most situations.</p>
+
+              <ul>
+                <li>Watercolor paints (student or professional grade)</li>
+                <li>Cold-pressed watercolor paper (140lb / 300gsm)</li>
+                <li>Round brushes: sizes 4, 8, and 12</li>
+                <li>Two water jars, a mixing palette, and paper towels</li>
+              </ul>
+
+              <div class="callout-box">
+                <strong>💡 Pro Tip:</strong> Invest in quality paper first — even cheap paints look better on good paper than premium paints on copy paper.
+              </div>
+
+              <h2>1. Wet-on-Wet Technique</h2>
+              <p>This is the most magical watercolor technique. Wet your paper first, then drop color onto it and watch it bloom. It's perfect for skies, backgrounds, and creating dreamy, soft effects. You can also explore more <a href="#blog" class="internal-link">landscape painting tutorials on CraftNest</a>.</p>
+
+              <h2>2. Wet-on-Dry Technique</h2>
+              <p>Apply wet paint onto dry paper for crisp, controlled edges. This is ideal for details, lettering, and botanical illustration. For in-depth brush control guides, check out resources from <a href="https://www.artistsnetwork.com" target="_blank" rel="nofollow noopener" class="external-link">Artists Network</a> and <a href="https://www.craftsy.com" target="_blank" rel="nofollow noopener" class="external-link">Craftsy</a>.</p>
+
+              <h3>Blending Colors</h3>
+              <p>Work while the paint is still wet for smooth transitions. For <a href="#blog" class="internal-link">color theory basics</a>, see our companion article on understanding pigment mixing for crafters.</p>
+
+              <p>The best part about watercolor is that "mistakes" often become your best happy accidents. Embrace the flow of the medium and don't overwork your washes.</p>
+
+              <div class="article-tags">
+                <span class="tag-pill" onclick="filterCategory(null,'painting')">#Watercolor</span>
+                <span class="tag-pill">#Painting</span>
+                <span class="tag-pill">#Beginner</span>
+                <span class="tag-pill">#ArtTutorial</span>
+                <span class="tag-pill" onclick="filterCategory(null,'all')">#DIY</span>
+                <span class="tag-pill">#HomeDecor</span>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+          <!-- Popular Posts Widget -->
+          <div class="sidebar-widget reveal">
+            <h3 class="widget-title">🔥 Popular Posts</h3>
+            <div class="popular-post" onclick="openPost('macrame')">
+              <div class="popular-thumb pp1">🌿</div>
+              <div class="popular-info">
+                <p class="ptitle">DIY Macramé Wall Hanging Tutorial</p>
+                <p class="pmeta">1.2k views · Apr 9</p>
+              </div>
+            </div>
+            <div class="popular-post" onclick="openPost('candles')">
+              <div class="popular-thumb pp2">🕯️</div>
+              <div class="popular-info">
+                <p class="ptitle">How to Make Soy Wax Candles</p>
+                <p class="pmeta">984 views · Mar 28</p>
+              </div>
+            </div>
+            <div class="popular-post" onclick="openPost('upcycling')">
+              <div class="popular-thumb pp3">♻️</div>
+              <div class="popular-info">
+                <p class="ptitle">15 Genius Mason Jar Upcycles</p>
+                <p class="pmeta">873 views · Mar 30</p>
+              </div>
+            </div>
+            <div class="popular-post" onclick="openPost('jewelry')">
+              <div class="popular-thumb pp4">💎</div>
+              <div class="popular-info">
+                <p class="ptitle">Wire Wrapping for Beginners</p>
+                <p class="pmeta">742 views · Apr 3</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Widget -->
+          <div class="sidebar-widget reveal">
+            <h3 class="widget-title">📂 Categories</h3>
+            <ul class="category-list">
+              <li onclick="filterCategory(null,'painting')"><span>🎨 Painting</span><span class="cat-count">24</span></li>
+              <li onclick="filterCategory(null,'knitting')"><span>🧶 Knitting</span><span class="cat-count">18</span></li>
+              <li onclick="filterCategory(null,'papercraft')"><span>📄 Paper Craft</span><span class="cat-count">15</span></li>
+              <li onclick="filterCategory(null,'pottery')"><span>🏺 Pottery</span><span class="cat-count">12</span></li>
+              <li onclick="filterCategory(null,'macrame')"><span>🌿 Macramé</span><span class="cat-count">9</span></li>
+              <li onclick="filterCategory(null,'upcycling')"><span>♻️ Upcycling</span><span class="cat-count">21</span></li>
+              <li onclick="filterCategory(null,'candles')"><span>🕯️ Candles</span><span class="cat-count">8</span></li>
+              <li onclick="filterCategory(null,'resin')"><span>✦ Resin Art</span><span class="cat-count">11</span></li>
+            </ul>
+          </div>
+
+          <!-- Sidebar Ad -->
+          <div class="sidebar-widget reveal" style="padding: 0; overflow: hidden; background: transparent; border: none;">
+            <ins class="adsbygoogle ad-placeholder"
+                 style="display:block;width:100%;height:250px;border-radius:14px;"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="5566778899"
+                 data-ad-format="rectangle">
+            </ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
+          <!-- Newsletter Widget -->
+          <div class="sidebar-widget newsletter-widget reveal">
+            <h3 class="widget-title">💌 Weekly Craft Ideas</h3>
+            <p>Get fresh tutorials and DIY inspiration every week, straight to your inbox.</p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="your@email.com" id="sidebarEmail"/>
+              <button onclick="subscribeNewsletter('sidebar')">Subscribe Free →</button>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="steps-section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 0;">
+        <span class="section-label">Simple Process</span>
+        <h2 class="section-title">Start Crafting in 4 Steps</h2>
+        <p class="section-desc" style="margin:14px auto 48px;">From finding your project to sharing your creation — CraftNest makes it easy.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-number">1</div>
+          <div class="step-icon">🔍</div>
+          <h4 class="step-title">Browse Projects</h4>
+          <p class="step-desc">Explore hundreds of tutorials sorted by skill level, time, and category.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-number">2</div>
+          <div class="step-icon">🛒</div>
+          <h4 class="step-title">Gather Supplies</h4>
+          <p class="step-desc">Every tutorial comes with a complete materials list with product links.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-number">3</div>
+          <div class="step-icon">✂️</div>
+          <h4 class="step-title">Create & Make</h4>
+          <p class="step-desc">Follow step-by-step photo guides at your own pace, anytime.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-number">4</div>
+          <div class="step-icon">🌟</div>
+          <h4 class="step-title">Share & Inspire</h4>
+          <p class="step-desc">Show off your creation and inspire the CraftNest community!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLS & RESOURCES ===== -->
+  <section class="tools-section" id="about">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <span class="section-label">Resources</span>
+          <h2 class="section-title">Recommended Tools & Supplies</h2>
+        </div>
+        <a href="#shop" class="view-all" onclick="trackClick('view_tools')">View Shop</a>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card reveal" onclick="trackExternalLink('amazon_paints')">
+          <div class="tool-icon-wrap ti1">🎨</div>
+          <div class="tool-info">
+            <p class="tool-name">Watercolor Paint Sets</p>
+            <p class="tool-desc">Professional-grade sets for beginners and advanced artists alike.</p>
+            <a href="https://www.amazon.com" target="_blank" rel="nofollow noopener" class="external-badge">View on Amazon ↗</a>
+          </div>
+        </div>
+        <div class="tool-card reveal" onclick="trackExternalLink('etsy_yarn')">
+          <div class="tool-icon-wrap ti2">🧶</div>
+          <div class="tool-info">
+            <p class="tool-name">Craft Yarns & Threads</p>
+            <p class="tool-desc">Handpicked sustainable yarn collections for knitting and macramé.</p>
+            <a href="https://www.etsy.com" target="_blank" rel="nofollow noopener" class="external-badge">View on Etsy ↗</a>
+          </div>
+        </div>
+        <div class="tool-card reveal" onclick="trackExternalLink('amazon_clay')">
+          <div class="tool-icon-wrap ti3">🏺</div>
+          <div class="tool-info">
+            <p class="tool-name">Air-Dry Clay Kits</p>
+            <p class="tool-desc">No kiln required. Perfect starter kits for home pottery projects.</p>
+            <a href="https://www.amazon.com" target="_blank" rel="nofollow noopener" class="external-badge">View on Amazon ↗</a>
+          </div>
+        </div>
+        <div class="tool-card reveal" onclick="trackExternalLink('michaels_resin')">
+          <div class="tool-icon-wrap ti4">✦</div>
+          <div class="tool-info">
+            <p class="tool-name">Resin Art Supplies</p>
+            <p class="tool-desc">Epoxy resin kits, pigment powders, and molds for stunning pieces.</p>
+            <a href="https://www.michaels.com" target="_blank" rel="nofollow noopener" class="external-badge">Michaels.com ↗</a>
+          </div>
+        </div>
+        <div class="tool-card reveal" onclick="trackExternalLink('hobbylobby_canvas')">
+          <div class="tool-icon-wrap ti5">🖼️</div>
+          <div class="tool-info">
+            <p class="tool-name">Canvas & Frames</p>
+            <p class="tool-desc">Stretched canvas, panels, and frames for every painting style.</p>
+            <a href="https://www.hobbylobby.com" target="_blank" rel="nofollow noopener" class="external-badge">Hobby Lobby ↗</a>
+          </div>
+        </div>
+        <div class="tool-card reveal" onclick="trackExternalLink('youtube_crafting')">
+          <div class="tool-icon-wrap ti6">🎥</div>
+          <div class="tool-info">
+            <p class="tool-name">Video Tutorials</p>
+            <p class="tool-desc">Watch our full tutorial series on YouTube — 100+ free videos.</p>
+            <a href="https://www.youtube.com" target="_blank" rel="nofollow noopener" class="external-badge">YouTube Channel ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SHOP ===== -->
+  <section class="shop-section" id="shop">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <span class="section-label">Our Store</span>
+          <h2 class="section-title">Shop DIY Kits & Supplies</h2>
+        </div>
+        <a href="#shop" class="view-all" onclick="trackClick('view_all_products')">Browse All</a>
+      </div>
+      <div class="products-grid">
+        <div class="product-card reveal" onclick="trackClick('product_macrame')">
+          <div class="product-thumb pt1">
+            🌿
+            <span class="product-badge-new">New</span>
+          </div>
+          <div class="product-body">
+            <p class="product-cat">Macramé</p>
+            <p class="product-name">Complete Macramé Starter Kit</p>
+            <p class="product-price">₹1,499 <del>₹1,999</del></p>
+            <button class="product-add-btn" onclick="addToCart(event,'macrame_kit')">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" onclick="trackClick('product_watercolor')">
+          <div class="product-thumb pt2">🎨</div>
+          <div class="product-body">
+            <p class="product-cat">Painting</p>
+            <p class="product-name">Pro Watercolor Set (24 Colors)</p>
+            <p class="product-price">₹899 <del>₹1,299</del></p>
+            <button class="product-add-btn" onclick="addToCart(event,'watercolor_set')">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" onclick="trackClick('product_clay')">
+          <div class="product-thumb pt3">🏺</div>
+          <div class="product-body">
+            <p class="product-cat">Pottery</p>
+            <p class="product-name">Air-Dry Clay Pottery Kit</p>
+            <p class="product-price">₹649</p>
+            <button class="product-add-btn" onclick="addToCart(event,'clay_kit')">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card reveal" onclick="trackClick('product_resin')">
+          <div class="product-thumb pt4">
+            ✦
+            <span class="product-badge-new">Sale</span>
+          </div>
+          <div class="product-body">
+            <p class="product-cat">Resin Art</p>
+            <p class="product-name">Epoxy Resin Ocean Art Bundle</p>
+            <p class="product-price">₹2,199 <del>₹2,799</del></p>
+            <button class="product-add-btn" onclick="addToCart(event,'resin_bundle')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-label">Community Love</span>
+        <h2 class="section-title" style="margin-bottom:14px;">What Crafters Are Saying</h2>
+        <p class="section-desc" style="margin:0 auto 48px;">Join over 50,000 crafters who've found their creative spark on CraftNest.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">CraftNest changed how I approach DIY. The tutorials are so detailed and the supply lists are always accurate. I've completed 12 projects this year!</p>
+          <div class="testimonial-author">
+            <div class="ta-avatar ta1">AN</div>
+            <div>
+              <p class="ta-name">Ananya Nair</p>
+              <p class="ta-role">Hobbyist Crafter, Pune</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">I started with zero experience and now I sell my macramé pieces on Etsy. CraftNest's step-by-step format made learning feel effortless and fun.</p>
+          <div class="testimonial-author">
+            <div class="ta-avatar ta2">RS</div>
+            <div>
+              <p class="ta-name">Riya Sharma</p>
+              <p class="ta-role">Etsy Seller, Delhi</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★☆</div>
+          <p class="testimonial-text">The resin art tutorial was absolutely incredible. I made a gorgeous tray as a birthday gift and everyone was blown away. Highly recommended!</p>
+          <div class="testimonial-author">
+            <div class="ta-avatar ta3">VP</div>
+            <div>
+              <p class="ta-name">Vinod Patel</p>
+              <p class="ta-role">DIY Enthusiast, Ahmedabad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM AD BANNER ===== -->
+  <div class="bottom-ad">
+    <ins class="adsbygoogle ad-placeholder"
+         style="display:block;width:728px;max-width:100%;height:90px;margin:0 auto;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="6677889900"
+         data-ad-format="horizontal">
+    </ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">🎨</div>
+          <span class="logo-text">Craft<span>Nest</span></span>
+        </div>
+        <p class="footer-tagline">Make something beautiful today</p>
+        <p>Your creative home for art, craft, and DIY. Inspiring crafters since 2020.</p>
+        <div class="footer-social">
+          <a href="https://pinterest.com" target="_blank" rel="nofollow noopener" class="social-btn" title="Pinterest">📌</a>
+          <a href="https://instagram.com" target="_blank" rel="nofollow noopener" class="social-btn" title="Instagram">📸</a>
+          <a href="https://youtube.com" target="_blank" rel="nofollow noopener" class="social-btn" title="YouTube">▶️</a>
+          <a href="https://facebook.com" target="_blank" rel="nofollow noopener" class="social-btn" title="Facebook">👍</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tutorials</h4>
+        <ul>
+          <li><a href="#blog" onclick="filterCategory(null,'painting')">Watercolor Painting</a></li>
+          <li><a href="#blog" onclick="filterCategory(null,'macrame')">Macramé</a></li>
+          <li><a href="#blog" onclick="filterCategory(null,'pottery')">Pottery & Clay</a></li>
+          <li><a href="#blog" onclick="filterCategory(null,'resin')">Resin Art</a></li>
+          <li><a href="#blog" onclick="filterCategory(null,'knitting')">Knitting</a></li>
+          <li><a href="#blog" onclick="filterCategory(null,'jewelry')">Jewelry Making</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://www.amazon.com" target="_blank" rel="nofollow noopener">Shop Supplies</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" rel="nofollow noopener">Video Tutorials</a></li>
+          <li><a href="https://www.pinterest.com" target="_blank" rel="nofollow noopener">Pinterest Ideas</a></li>
+          <li><a href="https://www.etsy.com" target="_blank" rel="nofollow noopener">Sell Your Crafts</a></li>
+          <li><a href="#about">About CraftNest</a></li>
+          <li><a href="#contact">Write for Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in Touch</h4>
+        <p style="font-size:0.85rem; margin-bottom:16px; line-height:1.7;">Get weekly craft ideas and exclusive DIY deals in your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" id="footerEmail" style="background:rgba(255,255,255,0.1); color:#fff; border: 1px solid rgba(255,255,255,0.2);"/>
+          <button onclick="subscribeNewsletter('footer')" style="border-color:var(--terracotta); color:var(--terracotta-light);">Subscribe →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 CraftNest. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#sitemap">Sitemap</a>
+        <a href="#advertise">Advertise</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ============================================================
+    // GOOGLE ANALYTICS EVENT TRACKING
+    // ============================================================
+    function trackClick(label) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'click', {
+          event_category: 'Navigation',
+          event_label: label
+        });
+      }
+    }
+
+    function trackExternalLink(label) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'click', {
+          event_category: 'External Link',
+          event_label: label
+        });
+      }
+    }
+
+    // ============================================================
+    // MOBILE NAV
+    // ============================================================
+    function openMobileNav() {
+      document.getElementById('mobileNav').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeMobileNavOutside(e) {
+      if (e.target === document.getElementById('mobileNav')) closeMobileNav();
+    }
+
+    // ============================================================
+    // CATEGORY FILTER
+    // ============================================================
+    function filterCategory(pill, category) {
+      // Update active pill
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      if (pill) pill.classList.add('active');
+
+      // Filter post cards
+      const cards = document.querySelectorAll('#postsGrid .post-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Track in GA
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'filter', {
+          event_category: 'Category',
+          event_label: category
+        });
+      }
+
+      // Scroll to blog
+      document.getElementById('blog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ============================================================
+    // OPEN POST (simulated routing)
+    // ============================================================
+    function openPost(slug) {
+      // Track page view in GA
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          page_title: slug,
+          page_location: window.location.href + '#post/' + slug
+        });
+      }
+      document.getElementById('article').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ============================================================
+    // NEWSLETTER SUBSCRIBE
+    // ============================================================
+    function subscribeNewsletter(source) {
+      const inputId = source === 'footer' ? 'footerEmail' : 'sidebarEmail';
+      const email = document.getElementById(inputId).value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      // GA conversion event
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+          event_category: 'Newsletter',
+          event_label: source,
+          value: 1
+        });
+      }
+      alert('🎉 Thank you! You\'re subscribed to weekly craft ideas.');
+      document.getElementById(inputId).value = '';
+    }
+
+    // ============================================================
+    // ADD TO CART
+    // ============================================================
+    function addToCart(e, product) {
+      e.stopPropagation();
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'add_to_cart', {
+          event_category: 'Ecommerce',
+          event_label: product
+        });
+      }
+      const btn = e.target;
+      btn.textContent = '✓ Added!';
+      btn.style.background = 'var(--sage)';
+      setTimeout(() => {
+        btn.textContent = 'Add to Cart';
+        btn.style.background = '';
+      }, 2000);
+    }
+
+    // ============================================================
+    // BACK TO TOP BUTTON
+    // ============================================================
+    const backTopBtn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backTopBtn.classList.add('show');
+      } else {
+        backTopBtn.classList.remove('show');
+      }
+    });
+
+    // ============================================================
+    // INTERSECTION OBSERVER FOR REVEAL ANIMATIONS
+    // ============================================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (i % 4) * 0.08 + 's';
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ============================================================
+    // SMOOTH ACTIVE NAV on SCROLL
+    // ============================================================
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // ============================================================
+    // GOOGLE ADS - init all adsbygoogle units
+    // ============================================================
+    (function() {
+      try {
+        var ads = document.querySelectorAll('ins.adsbygoogle');
+        ads.forEach(function(ad) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>
